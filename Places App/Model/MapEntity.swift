@@ -12,6 +12,7 @@ class MapEntity : Decodable {
     var rating : Double
     var lat : Double
     var long : Double
+    var imageReference : String?
     
 //    enum CodingKeys: String, CodingKey {
 //        case name = "name"
@@ -29,12 +30,26 @@ class MapEntity : Decodable {
     
     init(jsonData : [String:Any]){
         self.name = (jsonData["name"] as? String) ?? "Default"
-        self.rating = Double((jsonData["rating"] as? NSNumber) ?? 0.0) 
+        self.rating = Double(truncating: (jsonData["rating"] as? NSNumber) ?? 0.0) 
         self.lat = 0.0
         self.long = 0.0
         if let geometry = jsonData["geometry"] as? [String:Any], let location = geometry["location"] as? [String:Any] {
             self.lat = (location["lat"] as? Double) ?? 0.0
             self.long = (location["lng"] as? Double) ?? 0.0
         }
+        if let photos = jsonData["photos"] as? [[String:Any]], let first = photos.first {
+            self.imageReference = first["photo_reference"] as? String
+        }
+    }
+    
+    func getImageDownloadLink() -> String? {
+        if let reference = self.imageReference {
+            let url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=\(constants.maxImageWidth)&photoreference=\(reference)&key=\(constants.key)"
+            return url
+        }else {
+            return nil
+        }
+      
+
     }
 }

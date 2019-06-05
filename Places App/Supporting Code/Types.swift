@@ -7,7 +7,15 @@
 //
 
 import Foundation
+
 enum LocationState {
     case Success
     case Fail
+}
+
+
+struct constants {
+    static var key = "AIzaSyBTBReGJAtxvsIPOYhzlaqfx99RdEkHyvk"
+    static var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
+    static var maxImageWidth = "400"
 }

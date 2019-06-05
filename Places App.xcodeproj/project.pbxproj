@@ -17,6 +17,11 @@
 		CA59066D22A6E58700C82D85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA59066C22A6E58700C82D85 /* Assets.xcassets */; };
 		CA59067022A6E58800C82D85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA59066E22A6E58800C82D85 /* LaunchScreen.storyboard */; };
 		CA59067822A6E6A500C82D85 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA59067722A6E6A500C82D85 /* Command.swift */; };
+		CAA9470122A7B59300895ECE /* CategorySpecificViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA946FF22A7B59300895ECE /* CategorySpecificViewController.swift */; };
+		CAA9470222A7B59300895ECE /* CategorySpecificViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAA9470022A7B59300895ECE /* CategorySpecificViewController.xib */; };
+		CAA9470522A7BA3F00895ECE /* customCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9470322A7BA3F00895ECE /* customCollectionViewCell.swift */; };
+		CAA9470622A7BA3F00895ECE /* customCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAA9470422A7BA3F00895ECE /* customCollectionViewCell.xib */; };
+		CAA9470822A7C98F00895ECE /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9470722A7C98F00895ECE /* ImageDownloader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +37,11 @@
 		CA59066F22A6E58800C82D85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA59067122A6E58800C82D85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA59067722A6E6A500C82D85 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		CAA946FF22A7B59300895ECE /* CategorySpecificViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySpecificViewController.swift; sourceTree = "<group>"; };
+		CAA9470022A7B59300895ECE /* CategorySpecificViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategorySpecificViewController.xib; sourceTree = "<group>"; };
+		CAA9470322A7BA3F00895ECE /* customCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customCollectionViewCell.swift; sourceTree = "<group>"; };
+		CAA9470422A7BA3F00895ECE /* customCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = customCollectionViewCell.xib; sourceTree = "<group>"; };
+		CAA9470722A7C98F00895ECE /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +68,8 @@
 			children = (
 				CA406C5522A77D9A0039D573 /* CategoryTableViewCell.swift */,
 				CA406C5622A77D9A0039D573 /* CategoryTableViewCell.xib */,
+				CAA9470322A7BA3F00895ECE /* customCollectionViewCell.swift */,
+				CAA9470422A7BA3F00895ECE /* customCollectionViewCell.xib */,
 			);
 			path = "Custom Cells";
 			sourceTree = "<group>";
@@ -67,6 +79,7 @@
 			children = (
 				CA406C5922A785E90039D573 /* Types.swift */,
 				CA59067722A6E6A500C82D85 /* Command.swift */,
+				CAA9470722A7C98F00895ECE /* ImageDownloader.swift */,
 			);
 			path = "Supporting Code";
 			sourceTree = "<group>";
@@ -75,6 +88,8 @@
 			isa = PBXGroup;
 			children = (
 				CA59066722A6E58500C82D85 /* ViewController.swift */,
+				CAA946FF22A7B59300895ECE /* CategorySpecificViewController.swift */,
+				CAA9470022A7B59300895ECE /* CategorySpecificViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -170,7 +185,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA59067022A6E58800C82D85 /* LaunchScreen.storyboard in Resources */,
+				CAA9470622A7BA3F00895ECE /* customCollectionViewCell.xib in Resources */,
 				CA59066D22A6E58700C82D85 /* Assets.xcassets in Resources */,
+				CAA9470222A7B59300895ECE /* CategorySpecificViewController.xib in Resources */,
 				CA59066B22A6E58500C82D85 /* Main.storyboard in Resources */,
 				CA406C5822A77D9A0039D573 /* CategoryTableViewCell.xib in Resources */,
 			);
@@ -184,10 +201,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA59066822A6E58500C82D85 /* ViewController.swift in Sources */,
+				CAA9470122A7B59300895ECE /* CategorySpecificViewController.swift in Sources */,
 				CA19FFA722A7A632002B19E8 /* MapEntity.swift in Sources */,
+				CAA9470522A7BA3F00895ECE /* customCollectionViewCell.swift in Sources */,
 				CA59066622A6E58500C82D85 /* AppDelegate.swift in Sources */,
 				CA59067822A6E6A500C82D85 /* Command.swift in Sources */,
 				CA406C5A22A785E90039D573 /* Types.swift in Sources */,
+				CAA9470822A7C98F00895ECE /* ImageDownloader.swift in Sources */,
 				CA406C5722A77D9A0039D573 /* CategoryTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
