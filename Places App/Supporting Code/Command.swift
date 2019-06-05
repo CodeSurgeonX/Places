@@ -9,12 +9,7 @@
 import Foundation
 
 class PlacesCommand  {
-    
-    enum ResponseError : Error {
-        case limitExceeded(String)
-    }
-    
-    func getDataForUrl(_ url : URL, responseHandler : @escaping (Result<[Any],Error>) -> ()) {
+    func getDataForUrl(_ url : URL, responseHandler : @escaping (Result<[Any],ResponseError>) -> ()) {
         let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
             
             if error == nil, data != nil {
@@ -35,9 +30,11 @@ class PlacesCommand  {
                     }
                 }
             }else {
-                let response = response as? HTTPURLResponse
-                print(response?.statusCode)
-                responseHandler(.failure(error!))
+                if let response = response as? HTTPURLResponse {
+                    responseHandler(.failure(ResponseError.errorCode(response.statusCode)))
+                }else{
+                    responseHandler(.failure(ResponseError.unknown))
+                }
             }
         }
         dataTask.resume()

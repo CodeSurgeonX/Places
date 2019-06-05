@@ -52,7 +52,7 @@ extension CategorySpecificViewController : UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: screenWidth/2 - 32, height: 250)
+        return CGSize(width: screenWidth/2 - 16, height: 250)
     }
     
 }

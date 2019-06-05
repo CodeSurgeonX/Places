@@ -182,8 +182,18 @@ extension ViewController {
         }
     }
     
-    func handleFailure(error : Error){
-        let alert = UIAlertController(title: "Something Went Wrong", message: error.localizedDescription  , preferredStyle: .alert)
+    func handleFailure(error : ResponseError){
+        var errorMessage = ""
+        switch error {
+        case .limitExceeded(let message):
+            errorMessage = message
+        case .errorCode(let code):
+            errorMessage = "Error Code: \(code)"
+        case .unknown :
+            errorMessage = "Unknown Error"
+        }
+        
+        let alert = UIAlertController(title: "Something Went Wrong", message: errorMessage, preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .default) { (action) in
             alert.dismiss(animated: true, completion: nil)
         }

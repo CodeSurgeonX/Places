@@ -19,3 +19,10 @@ struct constants {
     static var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
     static var maxImageWidth = "400"
 }
+
+
+enum ResponseError : Error {
+    case limitExceeded(String)
+    case errorCode(Int)
+    case unknown
+}
