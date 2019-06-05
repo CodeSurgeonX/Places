@@ -12,12 +12,15 @@ import CoreLocation
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     var location = CLLocationManager()
     var coordinates = "28.612892,77.229431" //Dynamic
     var type = "restaurant" //Dynamic
     var locationRetrievalState : LocationState = .Fail
     var radius = "1000" //Dynamic
     var locationCoordinates : CLLocationCoordinate2D? = nil
+    var isUpdating = false
     lazy var customTableView : UITableView = {
         let tv = UITableView(frame: view.bounds)
         tv.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +52,7 @@ class ViewController: UIViewController {
     
     lazy var categoryDataSource = ["accounting","airport","amusement_park","aquarium","art_gallery","atm","bakery","bank","bar","beauty_salon","bicycle_store","book_store","bowling_alley","bus_station","cafe","campground","car_dealer","car_rental","car_repair","car_wash","casino","cemetery","church","city_hall","clothing_store","convenience_store","courthouse","dentist","department_store","doctor","electrician","electronics_store","embassy","fire_station","florist","funeral_home","furniture_store","gas_station","gym","hair_care","hardware_store","hindu_temple","home_goods_store","hospital","insurance_agency","jewelry_store","laundry","lawyer","library","liquor_store","local_government_office","locksmith","lodging","meal_delivery","meal_takeaway","mosque","movie_rental","movie_theater","moving_company","museum","night_club","painter","park","parking","pet_store","pharmacy","physiotherapist","plumber","police","post_office","real_estate_agency","restaurant","roofing_contractor","rv_park","school","shoe_store","shopping_mall","spa","stadium","storage","store","subway_station","supermarket","synagogue","taxi_stand","train_station","transit_station","travel_agency","veterinary_care","zoo"]
     
-    
+    var customUrlString : String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -104,23 +107,14 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        activityIndicator.startAnimating()
         tableView.deselectRow(at: indexPath, animated: true)
         type = categoryDataSource[indexPath.row]
-        let customUrlString = constants.url + "key=\(constants.key)" + "&" + "location=\(coordinates)" + "&" + "radius=\(radius)" + "&" + "type=\(type)"
-        if let url = URL(string: customUrlString) {
-            let command = PlacesCommand()
-            command.getDataForUrl(url,responseHandler: { [weak self] (res) in
-                switch res {
-                case .success(let resulArray) :
-                    self?.handleSuccess(result: resulArray)
-                    break
-                case .failure(let error) :
-                    self?.handleFailure(error: error)
-                    break
-                }
-            })
-        }
+        customUrlString = constants.url + "key=\(constants.key)" + "&" + "location=\(coordinates)" + "&" + "radius=\(radius)" + "&" + "type=\(type)"
+        makeAPICall(customUrlString)
     }
     
     
@@ -157,6 +151,26 @@ extension ViewController  : CLLocationManagerDelegate {
 
 // MARK:API Handling
 extension ViewController {
+    
+    fileprivate func makeAPICall(_ customUrlString: String) {
+        if let url = URL(string: customUrlString) {
+            let command = PlacesCommand()
+            command.getDataForUrl(url,responseHandler: { [weak self] (res) in
+                DispatchQueue.main.async { [weak self] in
+                    self?.activityIndicator.stopAnimating()
+                }
+                switch res {
+                case .success(let resulArray) :
+                    self?.handleSuccess(result: resulArray)
+                    break
+                case .failure(let error) :
+                    self?.handleFailure(error: error)
+                    break
+                }
+            })
+        }
+    }
+    
     func handleSuccess(result : [Any]) {
         if result.count == 0 {
             let alert = UIAlertController(title: "Found Nothing", message: "0 Results found, consider increasing the radius", preferredStyle: .alert)
@@ -179,8 +193,13 @@ extension ViewController {
             let specificCategoryVC = CategorySpecificViewController()
             specificCategoryVC.dataSource = data
             specificCategoryVC.delegate = self
-            DispatchQueue.main.async {
-                self.navigationController?.pushViewController(specificCategoryVC, animated: true)
+            DispatchQueue.main.async { [weak self] in
+                if self?.isUpdating == true {
+                    self?.navigationController?.pushViewController(specificCategoryVC, animated: false)
+                    self?.isUpdating = false
+                }else {
+                    self?.navigationController?.pushViewController(specificCategoryVC, animated: true)
+                }
             }
         }
     }
@@ -209,6 +228,14 @@ extension ViewController {
 
 
 extension ViewController : CategorySpecificViewControllerDelegate {
+    func updateAndReloadDataAndViews() {
+        self.isUpdating = true
+        location.startUpdatingLocation()
+        self.navigationController?.popToRootViewController(animated: false)
+//        customUrlString = constants.url + "key=\(constants.key)" + "&" + "location=\(coordinates)" + "&" + "radius=\(radius)" + "&" + "type=\(type)"
+        makeAPICall(customUrlString)
+    }
+    
 
     
     func getRadius() -> Double? {
@@ -226,6 +253,8 @@ extension ViewController : CategorySpecificViewControllerDelegate {
         }
         return nil
     }
+    
+    
     
     
     

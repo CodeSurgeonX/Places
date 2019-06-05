@@ -36,6 +36,11 @@
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Isk-fK-e3s">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </mapView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4O-bV-jSp">
+                    <rect key="frame" x="10" y="10" width="46" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button"/>
+                </button>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3E5-jw-WLy">
                     <rect key="frame" x="8" y="52" width="398" height="36"/>
                     <constraints>
@@ -49,6 +54,17 @@
                         <action selector="valueChanged:" destination="-1" eventType="valueChanged" id="Iwg-CO-c1w"/>
                     </connections>
                 </segmentedControl>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8k-i4-CjZ">
+                    <rect key="frame" x="342" y="790" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="7y7-gB-aUE"/>
+                        <constraint firstAttribute="height" constant="40" id="9pO-NV-w2h"/>
+                    </constraints>
+                    <state key="normal" image="refresh"/>
+                    <connections>
+                        <action selector="refreshLocation:" destination="-1" eventType="touchUpInside" id="3T1-tL-u8A"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -58,13 +74,18 @@
                 <constraint firstItem="Isk-fK-e3s" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="EuK-XQ-16J"/>
                 <constraint firstItem="3E5-jw-WLy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="Fav-ZY-vyp"/>
                 <constraint firstItem="Isk-fK-e3s" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Unz-2C-ULH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="B8k-i4-CjZ" secondAttribute="trailing" constant="32" id="WDC-fe-HMY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="9hW-vb-8l7" secondAttribute="bottom" id="X6Z-eb-Dyn"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3E5-jw-WLy" secondAttribute="trailing" constant="8" id="Y4I-LM-fVx"/>
                 <constraint firstItem="9hW-vb-8l7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="aNI-30-5O3"/>
                 <constraint firstItem="9hW-vb-8l7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hPi-zs-CGC"/>
                 <constraint firstItem="Isk-fK-e3s" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="mBb-WG-JkO"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="B8k-i4-CjZ" secondAttribute="bottom" constant="32" id="zg7-t7-eK7"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
     </objects>
+    <resources>
+        <image name="refresh" width="104" height="104"/>
+    </resources>
 </document>

@@ -27,3 +27,8 @@ enum ResponseError : Error {
     case unknown
 }
 
+//enum ControllerState {
+//    case regular
+//    case updating
+//}
+

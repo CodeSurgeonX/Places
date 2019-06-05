@@ -12,6 +12,7 @@ import MapKit
 protocol CategorySpecificViewControllerDelegate : class {
     func getMyPosition() -> CLLocationCoordinate2D?
     func getRadius() -> Double?
+    func updateAndReloadDataAndViews()
 }
 
 class CategorySpecificViewController: UIViewController {
@@ -44,6 +45,11 @@ class CategorySpecificViewController: UIViewController {
         mapView.showsUserLocation = true
     }
     
+    @IBAction func refreshLocation(_ sender: Any) {
+        if delegate != nil {
+            delegate?.updateAndReloadDataAndViews()
+        }
+    }
     
     @IBAction func valueChanged(_ sender: AnyObject?) {
         switch self.segmentControl.selectedSegmentIndex {
