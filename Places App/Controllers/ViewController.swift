@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     var type = "restaurant" //Dynamic
     var locationRetrievalState : LocationState = .Fail
     var radius = "1000" //Dynamic
+    var locationCoordinates : CLLocationCoordinate2D? = nil
     lazy var customTableView : UITableView = {
         let tv = UITableView(frame: view.bounds)
         tv.translatesAutoresizingMaskIntoConstraints = false
@@ -138,6 +139,7 @@ extension ViewController  : CLLocationManagerDelegate {
         let locus = locations[locations.count - 1]
         let latitude = locus.coordinate.latitude
         let longitude = locus.coordinate.longitude
+        locationCoordinates = locus.coordinate
         coordinates.removeAll()
         coordinates.append(String(latitude)+",")
         coordinates.append(String(longitude))
@@ -176,6 +178,7 @@ extension ViewController {
             }
             let specificCategoryVC = CategorySpecificViewController()
             specificCategoryVC.dataSource = data
+            specificCategoryVC.delegate = self
             DispatchQueue.main.async {
                 self.navigationController?.pushViewController(specificCategoryVC, animated: true)
             }
@@ -202,4 +205,29 @@ extension ViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
+}
+
+
+extension ViewController : CategorySpecificViewControllerDelegate {
+
+    
+    func getRadius() -> Double? {
+        if let radius = Double(radius) {
+            return radius
+        }
+        return nil
+    }
+    
+
+    
+    func getMyPosition() -> CLLocationCoordinate2D? {
+        if let coord = locationCoordinates {
+            return coord
+        }
+        return nil
+    }
+    
+    
+    
+    
 }

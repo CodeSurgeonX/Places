@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 class MapEntity : Decodable {
     var name : String
     var rating : Double
@@ -14,12 +15,12 @@ class MapEntity : Decodable {
     var long : Double
     var imageReference : String?
     
-//    enum CodingKeys: String, CodingKey {
-//        case name = "name"
-//        case rating = "rating"
-//        case lat = "lat"
-//        case long = "lng"
-//    }
+    //    enum CodingKeys: String, CodingKey {
+    //        case name = "name"
+    //        case rating = "rating"
+    //        case lat = "lat"
+    //        case long = "lng"
+    //    }
     
     init(name : String, rating : Double, lat:Double, long : Double) {
         self.name = name
@@ -49,7 +50,19 @@ class MapEntity : Decodable {
         }else {
             return nil
         }
-      
-
+        
+        
+    }
+    
+    
+    func getMapRepresentableAnnotation() -> MapAnnotation? {
+        let lat = CLLocationDegrees(exactly: self.lat)
+        let long = CLLocationDegrees(exactly: self.long)
+        if let _ = lat, let _ = long {
+            let coord = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+            let annotation = MapAnnotation(title: self.name,rating: String(self.rating) ,coordinate: coord)
+            return annotation
+        }
+        return nil
     }
 }

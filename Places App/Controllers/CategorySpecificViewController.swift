@@ -7,12 +7,22 @@
 //
 
 import UIKit
+import MapKit
 
-
+protocol CategorySpecificViewControllerDelegate : class {
+    func getMyPosition() -> CLLocationCoordinate2D?
+    func getRadius() -> Double?
+}
 
 class CategorySpecificViewController: UIViewController {
-    
+    var delegate : CategorySpecificViewControllerDelegate?
+    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var myCollectionView: UICollectionView!
+    @IBOutlet weak var segmentControl: UISegmentedControl! {
+        didSet{
+            valueChanged(nil)
+        }
+    }
     var dataSource = [MapEntity]()
     lazy var imageDownloader = ImageDownloader()
     
@@ -29,9 +39,26 @@ class CategorySpecificViewController: UIViewController {
         myCollectionView.dataSource = self
         myCollectionView.delegate = self
         myCollectionView.register(UINib(nibName: "customCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "categorySpecificCell")
+        
+        mapView.delegate = self
+        mapView.showsUserLocation = true
     }
-
-
+    
+    
+    @IBAction func valueChanged(_ sender: AnyObject?) {
+        switch self.segmentControl.selectedSegmentIndex {
+        case 0:
+            myCollectionView.isHidden = false
+            mapView.isHidden = true
+            break
+        case 1:
+            myCollectionView.isHidden = true
+            mapView.isHidden = false
+            renderMap()
+        default:
+            break
+        }
+    }
 }
 
 
@@ -55,4 +82,39 @@ extension CategorySpecificViewController : UICollectionViewDelegate, UICollectio
         return CGSize(width: screenWidth/2 - 16, height: 250)
     }
     
+    func renderMap(){
+        if delegate != nil {
+            if let radius = delegate?.getRadius(), let coord = delegate?.getMyPosition() {
+                if let latitudinal = CLLocationDistance(exactly: radius), let longitudinal = CLLocationDistance(exactly: radius) {
+                    let region = MKCoordinateRegion(center: coord, latitudinalMeters: latitudinal, longitudinalMeters: longitudinal)
+                    mapView.setRegion(region, animated: true)
+                }
+            }
+        }
+        for item in dataSource {
+            if let anno =  item.getMapRepresentableAnnotation() {
+                mapView.addAnnotation(anno)
+            }
+        }
+    }
+}
+
+extension CategorySpecificViewController : MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        guard let annotation = annotation as? MapAnnotation else { return nil }
+        let identifier = "myMarker"
+        var view: MKMarkerAnnotationView
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            as? MKMarkerAnnotationView {
+            dequeuedView.annotation = annotation
+            view = dequeuedView
+        } else {
+            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        return view
+    }
 }
