@@ -11,6 +11,7 @@
 		CA406C5722A77D9A0039D573 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA406C5522A77D9A0039D573 /* CategoryTableViewCell.swift */; };
 		CA406C5822A77D9A0039D573 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA406C5622A77D9A0039D573 /* CategoryTableViewCell.xib */; };
 		CA406C5A22A785E90039D573 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA406C5922A785E90039D573 /* Types.swift */; };
+		CA42A7F722A816F1008EB89D /* MapAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA42A7F622A816F1008EB89D /* MapAnnotations.swift */; };
 		CA59066622A6E58500C82D85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA59066522A6E58500C82D85 /* AppDelegate.swift */; };
 		CA59066822A6E58500C82D85 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA59066722A6E58500C82D85 /* ViewController.swift */; };
 		CA59066B22A6E58500C82D85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA59066922A6E58500C82D85 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 		CA406C5522A77D9A0039D573 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		CA406C5622A77D9A0039D573 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
 		CA406C5922A785E90039D573 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		CA42A7F622A816F1008EB89D /* MapAnnotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotations.swift; sourceTree = "<group>"; };
 		CA59066222A6E58500C82D85 /* Places App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Places App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA59066522A6E58500C82D85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA59066722A6E58500C82D85 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				CA19FFA622A7A632002B19E8 /* MapEntity.swift */,
+				CA42A7F622A816F1008EB89D /* MapAnnotations.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				CA59066822A6E58500C82D85 /* ViewController.swift in Sources */,
 				CAA9470122A7B59300895ECE /* CategorySpecificViewController.swift in Sources */,
 				CA19FFA722A7A632002B19E8 /* MapEntity.swift in Sources */,
+				CA42A7F722A816F1008EB89D /* MapAnnotations.swift in Sources */,
 				CAA9470522A7BA3F00895ECE /* customCollectionViewCell.swift in Sources */,
 				CA59066622A6E58500C82D85 /* AppDelegate.swift in Sources */,
 				CA59067822A6E6A500C82D85 /* Command.swift in Sources */,
